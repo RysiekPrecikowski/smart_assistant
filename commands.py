@@ -21,7 +21,7 @@ class Command:
 
     def execute(self):
         text = "powiedziales " + self.text
-        read_text(text, self.language)
+        read_text(text, "pl")
         self.action()
 
     @staticmethod
