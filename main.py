@@ -1,26 +1,29 @@
 from recognition_engine import Recognition_engine
 from commands import Command, Commands_container as Commands
 from commands_lib import *
-from onClick import TestApp
-from kivy.app import App
+from GUI import MyApp
 
-language = "pl-PL"
+
+# language = "pl-PL"
+language = "en-US"
 
 def main():
-    commands = Commands()
+    commands = Commands(language=language)
 
-    commands.add_command(Command("Wyłącz komputer", shutdown))
-    commands.add_command(Command("Zrestartuj komputer", restart))
-    commands.add_command(Command("Ścisz", decrease_volume))
-    commands.add_command(Command("Podgłośnij", increase_volume))
+    commands.add_command(Command("turn off computer", shutdown))
+    commands.add_command(Command("restart computer", restart))
+    commands.add_command(Command("turn volume down", decrease_volume))
+    commands.add_command(Command("turn volume up", increase_volume))
+    commands.add_command(Command("calculator", calculator))
+    commands.add_command(Command("open", open_app))
 
     engine = Recognition_engine(commands)
 
-
-    app = TestApp()
+    app = MyApp()
     app.add_engine(engine)
 
     app.run()
+
 
 
 if __name__ == '__main__':

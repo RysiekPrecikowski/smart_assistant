@@ -16,23 +16,29 @@ class Command:
         return self.normalized == other.normalized
 
     def __hash__(self):
-
         return hash(self.normalized)
 
-    def execute(self):
-        text = "powiedziales " + self.text
-        read_text(text, "pl")
-        self.action()
+    def execute(self, *args):
+        text = "you said " + self.text
+        # read_text(text, self.language)
+
+        # print("ARGS", *args)
+        if len(args) == 0:
+            return self.action()
+        else:
+            return self.action(*args)
 
     @staticmethod
     def normalize(text):
-        return str(unicodedata.normalize('NFKD', text).lower().replace(u'ł', 'l').encode('ASCII', 'ignore').decode("utf-8"))
+        if text is not None:
+            # print("NORMALIZED: ", unicodedata.normalize('NFKD', text).lower().replace(u'ł', 'l').encode('ASCII', 'ignore').decode("utf-8"))
+            return str(unicodedata.normalize('NFKD', text).lower().replace(u'ł', 'l').encode('ASCII', 'ignore').decode("utf-8"))
 
 
 
 
 class Commands_container:
-    def __init__(self, language="pl-PL", language_for_speech=None):
+    def __init__(self, language="en-US", language_for_speech=None):
         self.language = language
         if language_for_speech is None:
             self.language_for_speech = language.split("-")[0]
@@ -47,7 +53,7 @@ class Commands_container:
         self.commands[command.normalized] = command
         command.language = self.language_for_speech
 
-    def __getitem__(self, key):
+    def __getitem__(self, key) -> Command:
         return self.commands[Command.normalize(key)]
 
     def __contains__(self, item):

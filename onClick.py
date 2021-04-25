@@ -21,7 +21,7 @@ class TestApp(App):
     def pressed(self, instance):
         # sp.get_audio()
         # print("pressed")
-        self.engine.recognize()
+        self.engine.listen_and_execute()
 
     def add_engine(self, engine):
         self.engine = engine

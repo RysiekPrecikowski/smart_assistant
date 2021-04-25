@@ -1,6 +1,2 @@
-command1 = do smthing 1
-command2 = do smthing 2
-command3 = do smthing 3
-command4 = do smthing 4
-command5 = do smthing 5
-command6 = do smthing 6
+test
+test2

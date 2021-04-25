@@ -1,9 +1,11 @@
 from gtts import gTTS
 import playsound
+import os
 
 
 def read_text(text, language):
     speech = gTTS(text=text, lang=language, slow=False)
-    # speech.save("text.mp3")
-    # playsound.playsound('text.mp3')
-    #TODO wywala blad gdy drugi raz sie klika guzik
+    print("speaking:", text)
+    speech.save("text.mp3")
+    playsound.playsound('text.mp3')
+    os.remove("text.mp3")
