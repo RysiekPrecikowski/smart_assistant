@@ -19,6 +19,7 @@ def main():
 
     engine = Recognition_engine(commands)
 
+
     app = MyApp()
     app.add_engine(engine)
 

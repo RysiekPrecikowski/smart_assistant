@@ -5,6 +5,8 @@ from commands import Command, Commands_container as Commands
 from recognition_engine import Recognition_engine
 from speaking import read_text
 
+from multiprocessing import Process
+
 from math import sqrt
 
 import wolframalpha as wolfram
@@ -40,36 +42,6 @@ def decrease_volume(args):
         time.sleep(0.15)
 
 
-def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
-    def word():
-        os.system('"C:/Program Files (x86)/Microsoft Office/root/Office16/winword"')
-    def edge():
-        os.system('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"')
-        #todo docelowo komendy w pliku txt!!
-
-    commands = Commands()
-    commands.add_command(Command("microsoft word", word))
-    commands.add_command(Command("microsoft edge", edge))
-
-    args = args.lower()
-    text = args.replace("open ", "")
-    print(text)
-
-    engine = Recognition_engine(commands)
-    command, transcript = engine.recognize_command(text=text)
-
-    if command is not None:
-        print("opening", transcript)
-        command.execute()
-    else:
-        print("Tell what app you wanna open")
-        transcript = engine.get_transcript()
-
-        if transcript is not None:
-            command, transcript = engine.recognize_command(text=transcript)
-            if command is not None:
-                print("opening", transcript)
-                command.execute()
 
 
 
