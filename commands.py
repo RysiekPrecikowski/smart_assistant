@@ -2,11 +2,11 @@ import unicodedata
 from speaking import read_text
 
 class Command:
-    def __init__(self, text, action=None, args=None):
+    def __init__(self, text, action=None, action_args=None):
         self.language = None
         self.text = text
         self.action = action
-        self.action_args = args
+        self.action_args = action_args
         self.normalized = Command.normalize(self.text)
 
     def __repr__(self):
