@@ -1,3 +1,4 @@
+
 from commands import Command, Commands_container as Commands
 from recognition_engine import Recognition_engine
 from speaking import read_text
@@ -55,3 +56,4 @@ if __name__ == '__main__':
     # open_app("open microsoft word")
     open_app("open test edge")
     # open_app("open edge")
+

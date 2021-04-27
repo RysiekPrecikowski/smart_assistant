@@ -14,11 +14,10 @@ def main():
     commands.add_command(Command("restart computer", restart))
     commands.add_command(Command("turn volume down", decrease_volume))
     commands.add_command(Command("turn volume up", increase_volume))
-    # commands.add_command(Command("calculator", calculator))
-    # commands.add_command(Command("open", open_app))
+    commands.add_command(Command("calculator", calculator))
+    commands.add_command(Command("open", open_app))
 
     engine = Recognition_engine(commands)
-
 
     app = MyApp()
     app.add_engine(engine)

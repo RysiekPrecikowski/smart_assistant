@@ -5,8 +5,6 @@ from commands import Command, Commands_container as Commands
 from recognition_engine import Recognition_engine
 from speaking import read_text
 
-from multiprocessing import Process
-
 from math import sqrt
 
 import wolframalpha as wolfram

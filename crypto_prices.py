@@ -28,5 +28,9 @@ def get_crypto_info(args):
     pprint(cc.get_historical_price(name, currency, datetime(2019, 11, 3)))
 
 
+
+
+
 if __name__ == '__main__':
     get_crypto_info(None)
+
