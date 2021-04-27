@@ -3,7 +3,7 @@ import playsound
 import os
 
 
-def read_text(text, language):
+def read_text(text, language = "en"):
     speech = gTTS(text=text, lang=language, slow=False)
     print("speaking:", text)
     speech.save("text.mp3")
