@@ -2,10 +2,11 @@ import unicodedata
 from speaking import read_text
 
 class Command:
-    def __init__(self, text, action=None):
+    def __init__(self, text, action=None, args=None):
         self.language = None
         self.text = text
         self.action = action
+        self.action_args = args
         self.normalized = Command.normalize(self.text)
 
     def __repr__(self):
@@ -23,10 +24,14 @@ class Command:
         # read_text(text, self.language)
 
         # print("ARGS", *args)
-        if len(args) == 0:
-            return self.action()
+
+        if self.action_args is None:
+            if len(args) == 0:
+                return self.action()
+            else:
+                return self.action(*args)
         else:
-            return self.action(*args)
+            return self.action(self.action_args)
 
     @staticmethod
     def normalize(text):

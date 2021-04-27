@@ -11,9 +11,18 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
         os.system('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"')
         #todo docelowo komendy w pliku txt!!
 
+    def open_path(path):
+        os.system(path)
+
     commands = Commands()
     commands.add_command(Command("microsoft word", word))
     commands.add_command(Command("microsoft edge", edge))
+
+
+    c = Command("test edge", open_path, '"C:/Program Files (x86)/Microsoft Office/root/Office16/winword"') #TODO mozna dodawac komendy przez sama sciezke, bez tworzenia dodatkowej funkcji
+    commands.add_command(c)
+
+
 
     args = args.lower()
     text = args.replace("open ", "")
@@ -24,7 +33,8 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
 
     if command is not None:
         print("opening", transcript)
-        command.execute()
+        t = Thread(name="opened app", target=command.execute)
+        t.start()  # TODO jak to zrobic zeby odpalac niezalezny program?
     else:
         # print("Tell what app you wanna open")
         read_text("Tell me what app you wanna open")
@@ -42,4 +52,6 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
                 t.start() #TODO jak to zrobic zeby odpalac niezalezny program?
 
 if __name__ == '__main__':
-    open_app("open microsoft word")
+    # open_app("open microsoft word")
+    open_app("open test edge")
+    # open_app("open edge")
