@@ -1,6 +1,6 @@
 import webbrowser
 
-def searchCommend(phrase):
+def search_google(phrase):
     term = phrase
     url = "https://www.google.com.tr/search?q={}".format(term)
     webbrowser.register('chrome',
@@ -19,6 +19,6 @@ def search_youtube(phrase):
 
 
 if __name__ == '__main__':
-    searchCommend("kotki")
+    search_google("kotki")
     search_youtube("kotki")
 

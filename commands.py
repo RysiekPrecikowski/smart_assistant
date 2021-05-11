@@ -1,17 +1,24 @@
 import unicodedata
 from speaking import read_text
+from pprint import pprint
+import ast
+
+# from commands_lib import shutdown
+
 
 class Command:
     def __init__(self, text, action=None, action_args=None):
         self.language = None
         self.text = text
+        self.description = None
         self.action = action
         self.action_args = action_args
         self.normalized = Command.normalize(self.text)
 
     def __repr__(self):
         # print(self.text, self.action)
-        return self.text
+        # return self.text
+        return "'"+self.action.__name__+"'"
 
     def __eq__(self, other):
         return self.normalized == other.normalized
@@ -66,4 +73,19 @@ class Commands_container:
             return Command.normalize(item) in self.commands
 
         return item in self.commands
+
+    def save_to_file(self, name='commands'):
+        with open(name, 'w') as f:
+            f.write(self.commands.__str__())
+
+    def read_from_file(self, name='commands', module='commands_lib'):
+        with open(name, 'r') as f:
+            text = f.read()
+
+            mod = __import__(module)
+
+            self.commands = ast.literal_eval(text)
+
+            for key in self.commands.keys():
+                self.commands[key] = Command(key, getattr(mod, self.commands[key]))
 

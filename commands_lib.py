@@ -10,6 +10,16 @@ from math import sqrt
 import wolframalpha as wolfram
 from word2number import w2n
 
+from calculator import calculator
+from open_apps import open_app
+from my_speedtest import speed_test
+from notes import add_note
+from my_calendar import add_event, list_events
+
+from crypto_prices import get_crypto_info
+from weather import weather
+from web_searching import search_youtube, search_google
+
 
 def shutdown(args):
     print("shutdown")
@@ -40,5 +50,9 @@ def decrease_volume(args):
         time.sleep(0.15)
 
 
+def list_commands(args):
+    commands = Commands()
+    commands.read_from_file()
+    print(commands.commands.keys())
 
 

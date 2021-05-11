@@ -72,9 +72,11 @@ class MyGrid(GridLayout):
 
     def pressedCommandList(self, instance):
         # pobiera z pliku tekstowego commands listy komend i wypisanie ich
-        f = open('commands.txt')
+        f = open('commands')
         lines = f.read()  # -> jest szansa że tu trzeba to będzie zmienic na innego read-a
         # lines = "ten plik z komendami" # to wywalić jak zadziała plik
+        lines = lines.replace(',', '\n')
+        print(lines)
         self.outputPanel.text = lines
 
     def pressedEnd(self, instance):
