@@ -35,7 +35,7 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
     if command is not None:
         print("opening", transcript)
         t = Thread(name="opened app", target=command.execute)
-        t.start()  # TODO jak to zrobic zeby odpalac niezalezny program?
+        t.start()
     else:
         # print("Tell what app you wanna open")
         read_text("Tell me what app you wanna open")
@@ -50,7 +50,7 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
                 # command.execute()
 
                 t = Thread(name="opened app", target=command.execute)
-                t.start() #TODO jak to zrobic zeby odpalac niezalezny program?
+                t.start()
 
 if __name__ == '__main__':
     # open_app("open microsoft word")

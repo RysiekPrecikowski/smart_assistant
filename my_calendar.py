@@ -45,17 +45,20 @@ def add_event():
     location = None
     description = 'opis testowego eventu'
 
+    date = datetime.datetime(2021, 5, 11, 18, 10)
+    change = datetime.timedelta(minutes=25)
+
     timezone = 'Poland'
     event = {
         'summary': summary,
         'location': location,
         'description': description,
         'start': {
-            'dateTime': datetime.datetime(2021, 5, 11, 12, 50).isoformat(),
+            'dateTime': date.isoformat(),
             'timeZone': timezone,
         },
         'end': {
-            'dateTime': datetime.datetime(2021, 5, 11, 13, 55).isoformat(),
+            'dateTime': (date + change).isoformat(),
             'timeZone': timezone,
         },
         'colorId': 1,
@@ -74,7 +77,7 @@ def list_events(n=5):
     # Call the Calendar API
     now = datetime.datetime.now().astimezone(pytz.timezone('Europe/Warsaw')).isoformat()
 
-    # print('Getting the upcoming 10 events')
+
     events_result = service.events().list(calendarId='smart.assistant.python@gmail.com', timeMin=now,
                                           maxResults=n, singleEvents=True,
                                           orderBy='startTime').execute()
@@ -82,6 +85,8 @@ def list_events(n=5):
 
     if not events:
         print('No upcoming events found.')
+
+    print('Upcoming', len(events), 'events')
     for event in events:
         start = datetime.datetime.fromisoformat(event['start'].get('dateTime', event['start'].get('date')))
         print(start, event['summary'])
@@ -90,9 +95,11 @@ def list_events(n=5):
 def main():
     prepare_service()
 
+    add_event()
+
     list_events(2)
 
-    # add_event(service)
+
 
 if __name__ == '__main__':
     main()

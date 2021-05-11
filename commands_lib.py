@@ -7,9 +7,6 @@ from speaking import read_text
 
 from math import sqrt
 
-import wolframalpha as wolfram
-from word2number import w2n
-
 from calculator import calculator
 from open_apps import open_app
 from my_speedtest import speed_test

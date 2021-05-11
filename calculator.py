@@ -5,8 +5,9 @@ from math import sqrt
 from speaking import read_text
 import word2number as w2n
 
-#TODO to nie działaaaa :(
-def calculator(args): #TODO napisac to od nowa xd
+
+def calculator(args):
+    #TODO zamiast wolframa?
     def add(numbers):
         if len(numbers) == 0:
             return None
@@ -110,6 +111,23 @@ def calculator(args): #TODO napisac to od nowa xd
 
 
 
+def test():
+    test_cases = ["add twenty three and one",
+                  "subtract two from twenty one",
+                  "multiply two and three and twenty one",
+                  "divide six by two",
+                  "root of thirty six"]
+
+    test_ans = ['24', '19', '126', '3', '6']
+
+    client = wolframalpha.Client('4QAX6Y-3UTUETXHRV')
+
+    for test, ans in zip(test_cases, test_ans):
+        res = client.query(test)
+
+        answer = next(res.results).text
+
+        print(answer, answer == ans)
 
 def main():
     client = wolframalpha.Client('4QAX6Y-3UTUETXHRV')
@@ -119,12 +137,6 @@ def main():
     answer = next(res.results).text
 
     print(answer)
-    #
-    test_cases = ["add twenty three and one",
-                  "subtract two from twenty one",
-                  "multiply two and three and twenty one",
-                  "divide six by two",
-                  "root of thirty six"]
 
 
     # commands = Commands()
@@ -134,12 +146,6 @@ def main():
     #
     # print(transcript)
 
-    for test in test_cases:
-        res = client.query(test)
-
-        answer = next(res.results).text
-
-        print(answer)
 
 
     # res = client.query(transcript)
@@ -149,4 +155,5 @@ def main():
     # print(answer)
 
 if __name__ == '__main__':
-    main()
+    # main()
+    test()
