@@ -8,7 +8,7 @@ from kivy.uix.textinput import TextInput
 
 from recognition_engine import Recognition_engine
 from typing import Optional
-
+import traceback
 
 
 class MyGrid(GridLayout):
@@ -93,8 +93,9 @@ class MyGrid(GridLayout):
             else:
 
                 self.outputPanel.text = result
-        except Exception as e:
-            self.outputPanel.text = str(e)
+        except Exception as ex:
+            print("".join(traceback.TracebackException.from_exception(ex).format()))
+            self.outputPanel.text = str(ex)
 
         self.inputPanel.text = ""
 
