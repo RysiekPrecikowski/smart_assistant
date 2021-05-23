@@ -10,6 +10,7 @@ from recognition_engine import Recognition_engine
 from typing import Optional
 
 
+
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super(MyGrid, self).__init__(**kwargs)
@@ -90,6 +91,7 @@ class MyGrid(GridLayout):
             if result == None:
                 self.outputPanel.text = ""
             else:
+
                 self.outputPanel.text = result
         except Exception as e:
             self.outputPanel.text = str(e)

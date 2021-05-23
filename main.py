@@ -22,7 +22,7 @@ def main():
     commands.add_command(Command("calculator", calculator))
     commands.add_command(Command("open", open_app))
     commands.add_command(Command("what is my internet speed", speed_test))
-    commands.add_command(Command("create new note", add_note))
+    commands.add_command(Command("add note", add_note))
     commands.add_command(Command("add new event to calendar", add_event))
     commands.add_command(Command("list events in my calendar", list_events))
     commands.add_command(Command("tell me the price", get_crypto_info))

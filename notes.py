@@ -1,17 +1,17 @@
 import datetime
 from pprint import pprint
+from recognition_engine import Recognition_engine
 import lorem
 
 end = '$%$'
 end_date = '%$%'
 
 def add_note(text):
-    text = text.replace("create new note", "")
-
     print(text)
 
-    if len(text) < 0:
-        pass
+    if len(text) < 2:
+        engine = Recognition_engine()
+        text = engine.get_transcript()
 
     with open('notes.n', 'a') as file:
         date = datetime.datetime.now()

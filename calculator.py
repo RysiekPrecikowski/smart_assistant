@@ -133,14 +133,10 @@ def test():
 def calculator(text):
     client = wolframalpha.Client('4QAX6Y-3UTUETXHRV')
 
-
-    text = text.lower()
-    text = text.replace("calculator", "")
-
     print(text)
 
-    if len(text) < 4:
-        engine = Recognition_engine(Commands())
+    if len(text) < 1:
+        engine = Recognition_engine()
         text = engine.get_transcript()
 
 

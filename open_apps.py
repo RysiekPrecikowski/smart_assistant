@@ -8,7 +8,7 @@ import subprocess
 
 
 
-def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
+def open_app(text): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
     def open_path(path):
         return subprocess.Popen(path)
 
@@ -23,8 +23,6 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
         c = Command(name, open_path, path)
         commands.add_command(c)
 
-    args = args.lower()
-    text = args.replace("open ", "")
     print(text)
 
     engine = Recognition_engine(commands)

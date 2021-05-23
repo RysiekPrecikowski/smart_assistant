@@ -27,19 +27,22 @@ class Command:
         return hash(self.normalized)
 
     def execute(self, *args):
-        text = "you said " + self.text
+        # text = "you said " + self.text
         # read_text(text, self.language)
 
         # print("ARGS", *args)
 
         if self.action_args is None:
             if len(args) == 0:
-                return self.action()
+                res = self.action()
             else:
-                return self.action(*args)
+                res = self.action(*args)
         else:
-            return self.action(self.action_args)
+            res = self.action(self.action_args)
 
+        if type(res) == str:
+            read_text(res)
+        return res
     @staticmethod
     def normalize(text):
         if text is not None:

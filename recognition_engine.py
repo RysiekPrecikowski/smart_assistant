@@ -5,7 +5,7 @@ from typing import Optional
 
 
 class Recognition_engine:
-    def __init__(self, commands: Commands):
+    def __init__(self, commands: Commands = None):
         self.recognizer = sr.Recognizer()
         self.microphone = sr.Microphone()
         self.commands = commands
@@ -44,7 +44,10 @@ class Recognition_engine:
                     if word in self.commands:
                         print("FOUND COMMAND IN ONE WORD!!!")
                         normalized = Command.normalize(word)
-                        return self.commands[normalized], text
+                        command = self.commands[normalized]
+                        print("TEXT", text)
+                        print("COMM", command.text)
+                        return command, text[len(command.text)+1:].lower()
 
         if options:
             print(options)
