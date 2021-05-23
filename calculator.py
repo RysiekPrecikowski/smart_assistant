@@ -118,42 +118,41 @@ def test():
                   "divide six by two",
                   "root of thirty six"]
 
+    test_cases = ["calculator " + test_cases[i] for i in range(len(test_cases))]
+
     test_ans = ['24', '19', '126', '3', '6']
 
-    client = wolframalpha.Client('4QAX6Y-3UTUETXHRV')
-
     for test, ans in zip(test_cases, test_ans):
-        res = client.query(test)
 
-        answer = next(res.results).text
 
-        print(answer, answer == ans)
+        res = calculator(test)
+
+        print(ans == res)
+
 
 def calculator(text):
     client = wolframalpha.Client('4QAX6Y-3UTUETXHRV')
+
+
+    text = text.lower()
+    text = text.replace("calculator", "")
+
+    print(text)
+
+    if len(text) < 4:
+        engine = Recognition_engine(Commands())
+        text = engine.get_transcript()
+
 
     res = client.query(text)
 
     answer = next(res.results).text
 
     print(answer)
+    return answer
 
 
-    # commands = Commands()
-    # engine = Recognition_engine(commands)
-    #
-    # transcript = engine.get_transcript()
-    #
-    # print(transcript)
-
-
-
-    # res = client.query(transcript)
-    #
-    # answer = next(res.results).text
-    #
-    # print(answer)
 
 if __name__ == '__main__':
-    # calculator()
-    test()
+    calculator("calculator")
+    # test()

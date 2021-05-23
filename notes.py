@@ -6,6 +6,13 @@ end = '$%$'
 end_date = '%$%'
 
 def add_note(text):
+    text = text.replace("create new note", "")
+
+    print(text)
+
+    if len(text) < 0:
+        pass
+
     with open('notes.n', 'a') as file:
         date = datetime.datetime.now()
 
@@ -43,7 +50,7 @@ def clear_notes():
 
 def main():
     # clear_notes()
-    add_note(lorem.sentence())
+    add_note("create new note" + lorem.sentence())
     notes = get_notes()
     pprint(notes)
     # get_notes_between(notes, datetime.datetime(2021, 5, 11, 14, 30), datetime.datetime(2021, 5, 11, 15, 10))

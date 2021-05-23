@@ -66,11 +66,35 @@ class MyGrid(GridLayout):
 
         self.engine.listen_and_execute()
 
+
+
     def pressedExecute(self, instance):
         # znajduje daną komende wpisaną i ją wykonuje np  wpisujesz 'turn off computer' klikasz guzik i sie dzieją rzeczy
-        # można wywalić te przycisk jak uważasz jak chcemyt go implementować to jutro ogarne żeby to łądnie zczytwyało stry  
-        self.outputPanel.text = "execute"
-        self.engine.commands["open"].execute("open microsoft word") #TODO delete this line
+        # można wywalić te przycisk jak uważasz jak chcemyt go implementować to jutro ogarne żeby to łądnie zczytwyało stry
+
+        try:
+            command = self.inputPanel.text
+            # self.outputPanel.text = command
+
+            # wywołanie komendy command
+
+            command_to_run, text = self.engine.recognize_command(command)
+
+            print(command_to_run, text)
+
+
+            result = command_to_run.execute(text)
+
+            print("res", result)
+
+            if result == None:
+                self.outputPanel.text = ""
+            else:
+                self.outputPanel.text = result
+        except Exception as e:
+            self.outputPanel.text = str(e)
+
+        self.inputPanel.text = ""
 
     def pressedCommandList(self, instance):
         # pobiera z pliku tekstowego commands listy komend i wypisanie ich
@@ -107,10 +131,10 @@ class MyApp(App):
         print("Closing")
 
 
-from commands import Commands_container
-
-if __name__ == '__main__':
-    engine = Recognition_engine(Commands_container())
-    app = MyApp()
-    app.add_engine(engine)
-    app.run()
+# from commands import Commands_container
+#
+# if __name__ == '__main__':
+#     engine = Recognition_engine(Commands_container())
+#     app = MyApp()
+#     app.add_engine(engine)
+#     app.run()
