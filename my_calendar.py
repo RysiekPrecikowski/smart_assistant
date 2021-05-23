@@ -45,7 +45,7 @@ def add_event():
     location = None
     description = 'opis testowego eventu'
 
-    date = datetime.datetime(2021, 5, 11, 18, 10)
+    date = datetime.datetime(2021, 5, 11, 18, 30)
     change = datetime.timedelta(minutes=25)
 
     timezone = 'Poland'
@@ -97,7 +97,7 @@ def main():
 
     add_event()
 
-    list_events(2)
+    list_events()
 
 
 

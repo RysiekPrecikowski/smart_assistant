@@ -63,12 +63,14 @@ class MyGrid(GridLayout):
         # klikasz i mówisz
         # dodać rozpoznawanie komendy
         self.outputPanel.text = "speak"  # słowo speak można zastąpić jakimś outputem z komend jeżeli chce nam się w to bawić chcoiaż nie wiem czy to zadziała
+
         self.engine.listen_and_execute()
 
     def pressedExecute(self, instance):
         # znajduje daną komende wpisaną i ją wykonuje np  wpisujesz 'turn off computer' klikasz guzik i sie dzieją rzeczy
         # można wywalić te przycisk jak uważasz jak chcemyt go implementować to jutro ogarne żeby to łądnie zczytwyało stry  
         self.outputPanel.text = "execute"
+        self.engine.commands["open"].execute("open microsoft word") #TODO delete this line
 
     def pressedCommandList(self, instance):
         # pobiera z pliku tekstowego commands listy komend i wypisanie ich

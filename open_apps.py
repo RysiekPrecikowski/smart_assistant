@@ -4,16 +4,19 @@ from recognition_engine import Recognition_engine
 from speaking import read_text
 from threading import Thread
 import os
+import subprocess
 
 def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
     def word():
-        os.system('"C:/Program Files (x86)/Microsoft Office/root/Office16/winword"')
+        return subprocess.Popen('"C:/Program Files (x86)/Microsoft Office/root/Office16/winword"')
+        # os.system('"C:/Program Files (x86)/Microsoft Office/root/Office16/winword"')
     def edge():
-        os.system('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"')
-        #todo docelowo komendy w pliku txt!!
+        return subprocess.Popen('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"')
+        # os.system('"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"')
 
     def open_path(path):
-        os.system(path)
+        return subprocess.Popen(path)
+        # os.system(path)
 
     commands = Commands()
     commands.add_command(Command("microsoft word", word))
@@ -34,8 +37,9 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
 
     if command is not None:
         print("opening", transcript)
-        t = Thread(name="opened app", target=command.execute)
-        t.start()
+        # t = Thread(name="opened app", target=command.execute)
+        # t.start()
+        command.execute()
     else:
         # print("Tell what app you wanna open")
         read_text("Tell me what app you wanna open")
@@ -50,10 +54,10 @@ def open_app(args): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
                 # command.execute()
 
                 t = Thread(name="opened app", target=command.execute)
-                t.start()
+                t.start() #TODO zmienić na proces
 
 if __name__ == '__main__':
-    # open_app("open microsoft word")
-    open_app("open test edge")
+    open_app("open microsoft word")
+    # open_app("open test edge")
     # open_app("open edge")
 

@@ -6,7 +6,7 @@ from speaking import read_text
 import word2number as w2n
 
 
-def calculator(args):
+def calculator_old(args):
     #TODO zamiast wolframa?
     def add(numbers):
         if len(numbers) == 0:
@@ -129,10 +129,10 @@ def test():
 
         print(answer, answer == ans)
 
-def main():
+def calculator(text):
     client = wolframalpha.Client('4QAX6Y-3UTUETXHRV')
 
-    res = client.query("2+2")
+    res = client.query(text)
 
     answer = next(res.results).text
 
@@ -155,5 +155,5 @@ def main():
     # print(answer)
 
 if __name__ == '__main__':
-    # main()
+    # calculator()
     test()

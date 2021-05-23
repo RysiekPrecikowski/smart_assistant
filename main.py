@@ -3,10 +3,23 @@ from commands import Command, Commands_container as Commands
 from commands_lib import *
 
 from GUI import MyApp
-
-
+from threading import Thread
+import subprocess
 # language = "pl-PL"
 language = "en-US"
+
+# def run_GUI(engine):
+#     app = MyApp()
+#     app.add_engine(engine)
+#
+#     app.run()
+#
+#
+# def run_app(commands):
+#     engine = Recognition_engine(commands)
+#
+#     t = Thread(name="opened app", target=run_GUI, args=[engine])
+#     t.start()  # TODO zmienić na proces
 
 def main():
     commands = Commands(language=language)
@@ -32,12 +45,9 @@ def main():
 
     commands["tell me what can you do"].execute(None)
 
-    engine = Recognition_engine(commands)
 
-    app = MyApp()
-    app.add_engine(engine)
+    run_app(commands)
 
-    app.run()
 
 
 
