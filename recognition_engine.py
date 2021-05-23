@@ -32,32 +32,35 @@ class Recognition_engine:
         else:
             return None, None
 
+    # def recognize_command(self, text: str = None, options: dict = None) -> tuple[Optional[Command], Optional[str]]:
+    #     if text:
+    #         print("TEXT", text)
+    #         if text in self.commands:
+    #             normalized = Command.normalize(text)
+    #             print("FOUND COMMAND!!!")
+    #             return self.commands[normalized], text
+    #         else:
+    #             for word in text.split(" "):
+    #                 if word in self.commands:
+    #                     print("FOUND COMMAND IN ONE WORD!!!")
+    #                     normalized = Command.normalize(word)
+    #                     command = self.commands[normalized]
+    #                     print("TEXT", text)
+    #                     print("COMM", command.text)
+    #                     return command, text[len(command.text)+1:].lower()
+    #
+    #     if options:
+    #         print(options)
+    #         for option in options['alternative']:
+    #             print(option['transcript'])
+    #             command = self.recognize_command(option['transcript'])[0]
+    #             if command is not None:
+    #                 return command, option['transcript']
+    #
+    #     return None, None
+
     def recognize_command(self, text: str = None, options: dict = None) -> tuple[Optional[Command], Optional[str]]:
-        if text:
-            print("TEXT", text)
-            if text in self.commands:
-                normalized = Command.normalize(text)
-                print("FOUND COMMAND!!!")
-                return self.commands[normalized], text
-            else:
-                for word in text.split(" "):
-                    if word in self.commands:
-                        print("FOUND COMMAND IN ONE WORD!!!")
-                        normalized = Command.normalize(word)
-                        command = self.commands[normalized]
-                        print("TEXT", text)
-                        print("COMM", command.text)
-                        return command, text[len(command.text)+1:].lower()
-
-        if options:
-            print(options)
-            for option in options['alternative']:
-                print(option['transcript'])
-                command = self.recognize_command(option['transcript'])[0]
-                if command is not None:
-                    return command, option['transcript']
-
-        return None, None
+        pass
 
     def listen_and_execute(self):
         transcript, all_transcripts = self.get_transcript(all=True)
