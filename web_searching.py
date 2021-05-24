@@ -1,6 +1,10 @@
 import webbrowser
+from recognition_engine import Recognition_engine
 
 def search_google(phrase):
+    if len(phrase) < 1:
+        phrase = Recognition_engine().get_transcript(text="what do you wanna find?")
+
     term = phrase
     url = "https://www.google.com.tr/search?q={}".format(term)
     webbrowser.register('chrome',
@@ -9,6 +13,9 @@ def search_google(phrase):
     webbrowser.get('chrome').open(url)
 
 def search_youtube(phrase):
+    if len(phrase) < 1:
+        phrase = Recognition_engine().get_transcript(text="what do you wanna find?")
+
     term = phrase
     url = "https://www.youtube.com.tr/search?q={}".format(term)
     webbrowser.register('chrome',

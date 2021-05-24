@@ -10,7 +10,7 @@ from math import sqrt
 from calculator import calculator
 from open_apps import open_app
 from my_speedtest import speed_test
-from notes import add_note
+from notes import add_note, get_notes
 from my_calendar import add_event, list_events
 
 from crypto_prices import get_crypto_info
@@ -31,8 +31,14 @@ def restart(args):
 
 def increase_volume(args):
     keyboard = Controller()
+    n = 5
+    try:
+        if len(args) > 0:
+            n = int(args) //2
+    except:
+        pass
     # zwieksza o 10
-    for i in range(5):
+    for i in range(n):
         keyboard.press(Key.media_volume_up)
         keyboard.release(Key.media_volume_up)
         time.sleep(0.15)
@@ -40,8 +46,14 @@ def increase_volume(args):
 
 def decrease_volume(args):
     keyboard = Controller()
+    n = 5
+    try:
+        if len(args) > 0:
+            n = int(args) // 2
+    except:
+        pass
     # zmniejsza o 10
-    for i in range(5):
+    for i in range(n):
         keyboard.press(Key.media_volume_down)
         keyboard.release(Key.media_volume_down)
         time.sleep(0.15)
@@ -51,5 +63,10 @@ def list_commands(args):
     commands = Commands()
     commands.read_from_file()
     print(commands.commands.keys())
+    res = ""
+
+    for command in commands.commands.keys():
+        res += "{}\n".format(command)
+    return res
 
 

@@ -11,7 +11,10 @@ def add_note(text):
 
     if len(text) < 2:
         engine = Recognition_engine()
-        text = engine.get_transcript()
+        text = engine.get_transcript(text="dictate the note")
+
+    if text is None:
+        return
 
     with open('notes.n', 'a') as file:
         date = datetime.datetime.now()
@@ -21,21 +24,31 @@ def add_note(text):
 
         file.write(text+end)
 
-def get_notes():
+def get_notes(n):
     notes = {}
+
+    try:
+        if len(n) > 0:
+            n = int(n)
+    except:
+        n = 1
+
     with open('notes.n', 'r') as file:
         text = file.read()
         splitted = text.split(end)
         splitted.remove('')
-        for s in splitted:
+        for s in splitted[::-1][:n]:
+            print(s)
             time, note = s.split(end_date)
             time = time.replace('Note created: ', '')
 
             time = datetime.datetime.fromisoformat(time)
             notes[time] = note
 
-    # pprint(notes)
-    return notes
+    res = ""
+    for date, note in notes.items():
+        res += "Time: {}-{}-{} {:d}:{:02d}\nNote: {}\n".format(date.year, date.month, date.day, date.hour, date.minute, note)
+    return res
 
 def get_notes_between(notes, from_time, to_time):
 
@@ -51,9 +64,12 @@ def clear_notes():
 def main():
     # clear_notes()
     add_note("create new note" + lorem.sentence())
-    notes = get_notes()
+    notes = get_notes("")
     pprint(notes)
     # get_notes_between(notes, datetime.datetime(2021, 5, 11, 14, 30), datetime.datetime(2021, 5, 11, 15, 10))
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
+
+# if __name__ == '__main__':
+#     clear_notes()

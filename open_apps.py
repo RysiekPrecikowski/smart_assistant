@@ -29,8 +29,7 @@ def open_app(text): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
     command, transcript = engine.recognize_command(text=text)
 
     if command is None:
-        read_text("Tell me what app you wanna open")
-        transcript = engine.get_transcript()
+        transcript = engine.get_transcript(text="Tell me what app you wanna open")
 
         if transcript is not None:
             command, transcript = engine.recognize_command(text=transcript)

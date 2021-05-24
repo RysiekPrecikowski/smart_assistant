@@ -79,7 +79,7 @@ class Command:
     @staticmethod
     def normalize(text):
         if text is not None:
-            print("NORMALIZED: ", unicodedata.normalize('NFKD', text).lower().replace(u'ł', 'l').encode('ASCII', 'ignore').decode("utf-8"))
+            # print("NORMALIZED: ", unicodedata.normalize('NFKD', text).lower().replace(u'ł', 'l').encode('ASCII', 'ignore').decode("utf-8"))
             return str(unicodedata.normalize('NFKD', text).lower().replace(u'ł', 'l').encode('ASCII', 'ignore').decode("utf-8"))
 
     def normalize_with_accuracy(self, text, max_diff=0.5):

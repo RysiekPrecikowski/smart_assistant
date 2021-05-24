@@ -11,6 +11,8 @@ from typing import Optional
 import traceback
 
 
+
+
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super(MyGrid, self).__init__(**kwargs)
@@ -59,13 +61,25 @@ class MyGrid(GridLayout):
         # recognition engine, chyba to musi tu byc
         self.engine = None  # type: Optional[Recognition_engine]
 
+
+    def print_result(self, result):
+        print("res", result)
+
+        if result == None:
+            self.outputPanel.text = ""
+        else:
+
+            self.outputPanel.text = result
+
+
+
     # WSZYSTKIE PRESSY DO PRZEGLĄDNIĘCIA
     def pressedSpeak(self, instance):
         # klikasz i mówisz
         # dodać rozpoznawanie komendy
         self.outputPanel.text = "speak"  # słowo speak można zastąpić jakimś outputem z komend jeżeli chce nam się w to bawić chcoiaż nie wiem czy to zadziała
 
-        self.engine.listen_and_execute()
+        self.print_result(self.engine.listen_and_execute())
 
 
 
@@ -83,19 +97,11 @@ class MyGrid(GridLayout):
 
             print(command_to_run, text)
 
+            self.print_result(command_to_run.execute(text))
 
-            result = command_to_run.execute(text)
-
-            print("res", result)
-
-            if result == None:
-                self.outputPanel.text = ""
-            else:
-
-                self.outputPanel.text = result
         except Exception as ex:
             print("".join(traceback.TracebackException.from_exception(ex).format()))
-            self.outputPanel.text = str(ex)
+
 
         self.inputPanel.text = ""
 

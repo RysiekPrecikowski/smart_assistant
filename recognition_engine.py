@@ -9,24 +9,31 @@ class Recognition_engine:
     def __init__(self, commands: Commands = None):
         self.recognizer = sr.Recognizer()
         self.microphone = sr.Microphone()
+        if commands is None:
+            commands = Commands()
         self.commands = commands
 
-    def get_transcript(self, all=False):
+    def get_transcript(self, all=False, text=None):
         with self.microphone as source:
             # r.adjust_for_ambient_noise(source) jak tego sie uzywa to na poczatku slucha zeby wylapac tlo
+            if text:
+                read_text(text)
             print("say sth")
             audio = self.recognizer.listen(source)
             print("end")
         try:
             # print("language", self.commands.language)
             transcript = self.recognizer.recognize_google(audio, language=self.commands.language, show_all=False)
+
+            print("TRANSCRIPT", transcript)
+
             if not all:
                 return transcript
             else:
                 return transcript, self.recognizer.recognize_google(audio, language=self.commands.language, show_all=True)
 
         except sr.UnknownValueError:
-            pass
+            print("ERROR IN RECOGNIZE")
 
         if not all:
             return None
@@ -49,12 +56,13 @@ class Recognition_engine:
 
         print(text)
         return None, None
+
     def listen_and_execute(self):
-        transcript, all_transcripts = self.get_transcript(all=True)
+        transcript = self.get_transcript(all=False)
         print(transcript)
         if transcript is None:
             return
 
         command, text = self.recognize_command(text=transcript)
         if command is not None:
-            command.execute(text)
+            return command.execute(text)
