@@ -24,7 +24,6 @@ def search_youtube(phrase):
     webbrowser.get('chrome').open(url)
 
 
-
 if __name__ == '__main__':
     search_google("kotki")
     search_youtube("kotki")

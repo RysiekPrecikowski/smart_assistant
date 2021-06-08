@@ -3,8 +3,6 @@ from speaking import read_text
 from pprint import pprint
 import ast
 
-# from commands_lib import shutdown
-
 from collections import Counter
 from math import inf
 

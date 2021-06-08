@@ -13,9 +13,6 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 service = None
 
-import tkinter as tk
-import tkcalendar as tkc
-
 
 
 def prepare_service():

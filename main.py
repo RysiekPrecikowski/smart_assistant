@@ -1,19 +1,9 @@
-import threading
-
-import keyboard
-import time
-from recognition_engine import Recognition_engine
-from commands import Command, Commands_container as Commands
 from commands_lib import *
 
 from GUI import MyApp
-from threading import Thread
-import subprocess
-from multiprocessing import Process
 
 # language = "pl-PL"
 language = "en-US"
-
 
 
 

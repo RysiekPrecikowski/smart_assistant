@@ -142,10 +142,10 @@ class MyApp(App):
         print("Closing")
 
 
-# from commands import Commands_container
-#
-# if __name__ == '__main__':
-#     engine = Recognition_engine(Commands_container())
-#     app = MyApp()
-#     app.add_engine(engine)
-#     app.run()
+from commands import Commands_container
+
+if __name__ == '__main__':
+    engine = Recognition_engine(Commands_container())
+    app = MyApp()
+    app.add_engine(engine)
+    app.run()

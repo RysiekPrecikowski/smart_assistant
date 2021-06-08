@@ -1,14 +1,11 @@
-
 from commands import Command, Commands_container as Commands
 from recognition_engine import Recognition_engine
-from speaking import read_text
-from threading import Thread
-import os
+
 import subprocess
 
 
 
-def open_app(text): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
+def open_app(text):
     def open_path(path):
         return subprocess.Popen(path)
 
