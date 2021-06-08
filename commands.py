@@ -27,6 +27,8 @@ def cosine_metric(x, y, n=2):
     x_n_gram = n_gram(x, n)
     y_n_gram = n_gram(y, n)
 
+
+
     s = sum(x_n_gram[g] * y_n_gram[g] for g in x_n_gram.keys() & y_n_gram.keys())
 
     _len = lambda ngram: sum(v*2 for v in ngram.values()) ** 0.5

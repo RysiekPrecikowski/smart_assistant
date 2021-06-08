@@ -56,7 +56,7 @@ def decrease_volume(args):
     for i in range(n):
         keyboard.press(Key.media_volume_down)
         keyboard.release(Key.media_volume_down)
-        time.sleep(0.15)
+        time.sleep(0.25)
 
 
 def list_commands(args):

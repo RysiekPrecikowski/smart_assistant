@@ -47,7 +47,7 @@ class Recognition_engine:
                 if command is None:
                     return None, None
                 print("COMMAND", command)
-                if command.text == text[:len(command.text)]:
+                if command.text == text[:len(command.text)].lower():
                     return command, text[len(command.text) +1:]
                 return command, ""
             else:

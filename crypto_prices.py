@@ -10,7 +10,7 @@ def get_crypto_info(args):
     if len(args) < 1:
         args = Recognition_engine().get_transcript(text="tell me what crypto are you interested in?")
 
-    crypto = args
+    crypto = args[0].upper() + args[1:]
     print(crypto)
     cmc = coinmarketcapapi.CoinMarketCapAPI('3a9b4f7c-ca5b-4899-a76d-49cbef569178')  # todo w gotowej wersji klucz
     # cmc = coinmarketcapapi.CoinMarketCapAPI('c54bcf4d-1bca-4e8e-9a24-22ff2c3d462b', sandbox=True)

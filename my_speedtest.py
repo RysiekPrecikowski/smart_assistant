@@ -17,8 +17,5 @@ def speed_test(args):
 
     return res
 
-
-
-
 if __name__ == '__main__':
     speed_test(None)

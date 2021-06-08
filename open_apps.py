@@ -41,6 +41,6 @@ def open_app(text): #todo rozbudowac liste aplikacji (potrzebna sciezka do exe)
     command.execute()
 
 if __name__ == '__main__':
-    open_app("open microsoft word")
+    open_app("microsoft word")
 
 

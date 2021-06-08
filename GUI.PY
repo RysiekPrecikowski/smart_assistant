@@ -17,6 +17,7 @@ class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super(MyGrid, self).__init__(**kwargs)
 
+
         # Create pannels
 
         self.controlPanel = GridLayout()
@@ -133,6 +134,7 @@ class MyApp(App):
 
     def build(self):
         my_grid = MyGrid()
+        self.title = "Assistant"
         my_grid.add_engine(self.engine)
         return my_grid
 

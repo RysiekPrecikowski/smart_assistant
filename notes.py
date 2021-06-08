@@ -30,6 +30,8 @@ def get_notes(n):
     try:
         if len(n) > 0:
             n = int(n)
+        else:
+            n = 1
     except:
         n = 1
 
@@ -37,6 +39,9 @@ def get_notes(n):
         text = file.read()
         splitted = text.split(end)
         splitted.remove('')
+
+        print("N", type(n))
+
         for s in splitted[::-1][:n]:
             print(s)
             time, note = s.split(end_date)
@@ -68,8 +73,8 @@ def main():
     pprint(notes)
     # get_notes_between(notes, datetime.datetime(2021, 5, 11, 14, 30), datetime.datetime(2021, 5, 11, 15, 10))
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
 
 # if __name__ == '__main__':
 #     clear_notes()

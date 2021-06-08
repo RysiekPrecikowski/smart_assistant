@@ -6,11 +6,17 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 import pytz
+from recognition_engine import Recognition_engine
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 service = None
+
+import tkinter as tk
+import tkcalendar as tkc
+
+
 
 def prepare_service():
     """Shows basic usage of the Google Calendar API.
@@ -38,15 +44,32 @@ def prepare_service():
     service = build('calendar', 'v3', credentials=creds)
 
 
-def add_event():
+def add_event(text):
+    """
+    :param text: format: [dd:mm:yyyy] from [hh:mm] to [hh:mm] name [event name]
+    :return:
+    """
     if service is None:
         prepare_service()
-    summary = 'testowy event'
-    location = None
-    description = 'opis testowego eventu'
 
-    date = datetime.datetime(2021, 5, 11, 18, 30)
-    change = datetime.timedelta(minutes=25)
+    location = None
+    description = None
+
+
+    date, text = text.split(" from ")
+    f, text = text.split(" to ")
+    t, text = text.split(" name ")
+
+    date_start = datetime.datetime.strptime(date + " " + f, "%d.%m.%Y %H:%M")
+
+    date_end = datetime.datetime.strptime(date + " " + t, "%d.%m.%Y %H:%M")
+
+
+    summary = text
+
+
+    # date = datetime.datetime(2021, 6, 8, 18, 30)
+    # duration = datetime.timedelta(minutes=25)
 
     timezone = 'Poland'
     event = {
@@ -54,11 +77,13 @@ def add_event():
         'location': location,
         'description': description,
         'start': {
-            'dateTime': date.isoformat(),
+            # 'dateTime': date.isoformat(),
+            'dateTime': date_start.isoformat(),
             'timeZone': timezone,
         },
         'end': {
-            'dateTime': (date + change).isoformat(),
+            # 'dateTime': (date + duration).isoformat(),
+            'dateTime': date_end.isoformat(),
             'timeZone': timezone,
         },
         'colorId': 1,
@@ -69,14 +94,27 @@ def add_event():
         body=event,
 
     ).execute()
-    print(event)
+    # print(event)
+    return event['summary'] + " created"
 
-def list_events(n=5):
+def list_events(args):
     if service is None:
         prepare_service()
     # Call the Calendar API
     now = datetime.datetime.now().astimezone(pytz.timezone('Europe/Warsaw')).isoformat()
 
+    n = 5
+
+    try:
+        if len(args) > 0:
+            n = int(args) //2
+        assert n > 0
+    except AssertionError:
+        return "LIST 0 EVENTS?"
+    except:
+        pass
+
+    # try:
 
     events_result = service.events().list(calendarId='smart.assistant.python@gmail.com', timeMin=now,
                                           maxResults=n, singleEvents=True,
@@ -93,11 +131,11 @@ def list_events(n=5):
 
 
 def main():
-    prepare_service()
+    # prepare_service()
 
-    add_event()
+    add_event("08.06.2021 from 22:00 to 23:00 name spanko")
 
-    list_events()
+    list_events("2")
 
 
 
